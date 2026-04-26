@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products | Maranatha Naturals - Dr. Janny's Herbal Formulas</title>
+    
+    <!-- Bootstrap 5 CSS + Icons + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #1F2A3A;
+        }
+        
+        h1, h2, h3, h4, .navbar-brand {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        :root {
+            --primary: #2E5A3B;
+            --primary-dark: #1F3A2B;
+            --secondary: #C9A03D;
+            --cream: #F9F6EE;
+            --light-bg: #F5F8F2;
+            --dark: #1F2A3A;
+        }
+        
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary) !important;
+        }
+        
+        .navbar-brand small {
+            font-size: 0.7rem;
+            display: block;
+            color: var(--secondary);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark) !important;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+        
+        .btn-wa-nav {
+            background: #25D366;
+            color: white !important;
+            padding: 8px 20px !important;
+            border-radius: 40px;
+        }
+        
+        /* Products Hero */
+        .products-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 120px 0 60px;
+            color: white;
+            text-align: center;
+        }
+        
+        .products-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Category Filters */
+        .filters {
+            padding: 30px 0;
+            background: var(--light-bg);
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            margin: 5px;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Product Cards - Unique Masonry Style */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .product-img {
+            height: 240px;
+            background: linear-gradient(135deg, #F5F0E8, #EBE3D8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(46,90,59,0.1);
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover .product-img::after {
+            background: rgba(46,90,59,0.2);
+        }
+        
+        .product-body {
+            padding: 24px;
+            flex: 1;
+        }
+        
+        .product-category {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .product-description {
+            font-size: 0.85rem;
+            color: #4a5b4e;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .product-short-benefits {
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+        
+        .product-short-benefits li {
+            font-size: 0.75rem;
+            padding: 4px 0;
+            color: #5a6b5e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .product-short-benefits li i {
+            color: var(--primary);
+            font-size: 0.65rem;
+        }
+        
+        .product-footer {
+            padding: 16px 24px 24px;
+            border-top: 1px solid #f0e9dd;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn-order, .btn-details {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .btn-order {
+            background: #25D366;
+            color: white;
+            border: none;
+        }
+        
+        .btn-order:hover {
+            background: #128C7E;
+            transform: scale(1.02);
+        }
+        
+        .btn-details {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-details:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Modal Styling */
+        .modal-content {
+            border-radius: 28px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+        }
+        
+        .modal-header .btn-close {
+            background: white;
+            opacity: 0.8;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .modal-product-img {
+            background: var(--light-bg);
+            border-radius: 20px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        
+        .ingredients-list {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+        
+        .ingredients-list h5 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .ingredients-list ul {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .ingredients-list ul li {
+            background: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+        
+        .full-benefits {
+            margin: 20px 0;
+        }
+        
+        .full-benefits li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .full-benefits li i {
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: #ccc;
+            padding: 50px 0 30px;
+            margin-top: 50px;
+        }
+        
+        .footer h5 {
+            color: white;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 99;
+        }
+        
+        @media (max-width: 768px) {
+            .products-hero h1 {
+                font-size: 2rem;
+            }
+            .filters {
+                top: 70px;
+                overflow-x: auto;
+                white-space: nowrap;
+                display: flex;
+                flex-wrap: nowrap;
+            }
+            .filter-btn {
+                display: inline-block;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            MARANATHA NATURALS
+            <small>with Dr. Janny</small>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                <li class="nav-item"><a class="nav-link active" href="products.html">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#testimonials">Testimonials</a></li>
+                <li class="nav-item"><a class="btn-wa-nav" href="https://wa.me/"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="products-hero">
+    <div class="container">
+        <h1 data-aos="fade-up">Our Herbal Formulas</h1>
+        <p data-aos="fade-up" style="font-size: 1.2rem;">Doctor-formulated, nature-powered solutions for complete wellness</p>
+    </div>
+</section>
+
+<section class="filters">
+    <div class="container text-center">
+        <button class="filter-btn active" data-category="all">All Products</button>
+        <button class="filter-btn" data-category="blood-pressure">Blood Pressure</button>
+        <button class="filter-btn" data-category="blood-sugar">Blood Sugar</button>
+        <button class="filter-btn" data-category="body-care">Body Care</button>
+        <button class="filter-btn" data-category="serious">Serious Conditions</button>
+        <button class="filter-btn" data-category="fertility">Fertility & Conception</button>
+        <button class="filter-btn" data-category="hair">Hair Care</button>
+        <button class="filter-btn" data-category="hormonal">Hormonal Balance</button>
+        <button class="filter-btn" data-category="women">Women's Health</button>
+    </div>
+</section>
+
+<div class="container">
+    <div class="products-grid" id="productsContainer">
+        <!-- Products will be loaded dynamically -->
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5>Maranatha Naturals</h5>
+                <p>Doctor-formulated, nature-powered wellness solutions for the whole family.</p>
+            </div>
+            <div class="col-md-2 mb-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="index.html" style="color: #aaa;">Home</a></li>
+                    <li><a href="index.html#about" style="color: #aaa;">About</a></li>
+                    <li><a href="products.html" style="color: #aaa;">Products</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Contact</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/256790000222" style="color: #aaa;">WhatsApp Us</a></li>
+                    <li><i class="fas fa-envelope"></i> info@maranathanaturalss.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright text-center pt-4 mt-4" style="border-top: 1px solid #2c3e2f;">
+            <p>&copy; 2025 Maranatha Naturals with Dr. Janny Designed By Deprynce Tech</p>
+    </div>
+</footer>
+
+<a href="https://wa.me/256790000222" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
+<!-- Product Detail Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Product Name</h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-product-img" id="modalImage">
+                    🌿
+                </div>
+                <div id="modalContent">
+                    <!-- Dynamic content -->
+                </div>
+                <div class="text-center mt-4">
+                    <a href="https://wa.me/256790000222" class="btn-order" style="background: #25D366; color: white; padding: 12px 30px; border-radius: 40px; text-decoration: none; display: inline-block;">
+                        <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+    
+    // Complete Products Database (17 products by your categories)
+    const products = [
+        // Blood Pressure
+        { id: 1, name: "Anti Pressure Herbal Tea", category: "blood-pressure", displayCategory: "🩸 Blood Pressure", icon: "❤️", description: "A powerful blend of herbs formulated to help normalize blood pressure naturally. Supports heart health, improves circulation, and reduces pressure-related discomfort without side effects.", shortBenefits: ["Normalizes blood pressure", "Supports heart health", "Reduces pressure-related discomfort"], ingredients: ["Hawthorn Berry", "Hibiscus", "Garlic", "Ginger Root", "Motherwort", "Olive Leaf"], fullBenefits: ["Helps normalize blood pressure naturally", "Supports heart health and circulation", "Detoxifies and nourishes the body", "Reduces pressure-related discomfort", "Promotes calmness and cardiovascular balance"] },
+        
+        // Blood Sugar
+        { id: 2, name: "Blood Sugar Herbal Formula", category: "blood-sugar", displayCategory: "📊 Blood Sugar", icon: "🩸", description: "Doctor-formulated herbal blend that helps regulate blood sugar levels naturally. Improves insulin sensitivity, supports pancreatic function, and reduces sugar cravings.", shortBenefits: ["Regulates blood sugar", "Improves insulin sensitivity", "Reduces sugar cravings"], ingredients: ["Cinnamon", "Gymnema Sylvestre", "Bitter Melon", "Fenugreek", "Banaba Leaf", "Alpha Lipoic Acid"], fullBenefits: ["Helps reduce and stabilize blood sugar levels", "Supports insulin sensitivity and metabolic balance", "Improves digestion and nutrient absorption", "Detoxifies the body and reduces sugar cravings", "Promotes energy, clarity, and general wellness"] },
+        
+        // Body Care - Body Lotion
+        { id: 3, name: "Ultra Moisturizing Collagen Butter", category: "body-care", displayCategory: "🧴 Body Lotion", icon: "🧈", description: "A rich, nourishing body butter that deeply hydrates dry skin, boosts collagen production, and helps heal eczema and irritation. 100% organic and cruelty-free.", shortBenefits: ["Deeply hydrates dry skin", "Heals eczema", "Boosts collagen"], ingredients: ["Shea Butter", "Coconut Oil", "Collagen Peptides", "Vitamin E", "Aloe Vera", "Lavender Oil"], fullBenefits: ["Deeply hydrates and softens dry skin", "Evens out and balances skin tone", "Boosts collagen and reduces signs of ageing", "Heals eczema and soothes irritation", "100% organic, cruelty-free, and non-toxic"] },
+        
+        // Body Soap
+        { id: 4, name: "Papaya Face & Body Wash", category: "body-care", displayCategory: "🧼 Body Soap", icon: "🧼", description: "Gentle yet effective body wash enriched with papaya enzymes to brighten skin, fade dark spots, and unclog pores. Suitable for sensitive and acne-prone skin.", shortBenefits: ["Brightens skin tone", "Fades dark spots", "Unclogs pores"], ingredients: ["Papaya Extract", "Aloe Vera", "Vitamin C", "Glycerin", "Tea Tree Oil", "Coconut-Based Cleansers"], fullBenefits: ["Brightens skin tone and fades dark spots", "Deeply cleanses and unclogs pores", "Hydrates and nourishes sensitive skin", "Smooths texture and boosts collagen", "Supports acne relief and skin barrier repair"] },
+        
+        // Body Wash
+        { id: 5, name: "Maranatha Naturals Body Wash", category: "body-care", displayCategory: "🧴 Body Wash", icon: "🚿", description: "A luxurious, moisturizing body wash that cleanses without stripping natural oils. Infused with botanical extracts for soft, glowing skin.", shortBenefits: ["Moisturizes while cleansing", "Botanical extracts", "For all skin types"], ingredients: ["African Black Soap", "Coconut Oil", "Shea Butter", "Vitamin E", "Lemongrass Oil", "Rosemary Extract"], fullBenefits: ["Gently cleanses without stripping moisture", "Infused with natural botanical extracts", "Leaves skin soft, smooth, and glowing", "Free from sulfates and parabens", "Suitable for daily use on all skin types"] },
+        
+        // Cancer / Tumor
+        { id: 6, name: "Tumorless Herbal Formula", category: "serious", displayCategory: "⚕️ Cancer Support", icon: "💊", description: "Powerful herbal formula designed to support the body's natural ability to dissolve cysts, fibroids, and abnormal tissue masses. Supports cellular detox and immune response.", shortBenefits: ["Dissolves cysts & fibroids", "Supports cancer prevention", "Cellular detox"], ingredients: ["Graviola", "Turmeric", "Milk Thistle", "Chaparral", "Red Clover", "Essiac Tea Herbs"], fullBenefits: ["Dissolves cysts, fibroids, and tissue masses", "Supports natural cancer prevention and cellular detox", "Reduces inflammation and abnormal proliferations", "Promotes hormonal balance and reproductive health", "Enhances immune response and systemic cleansing"] },
+        
+        // Conception / Fertility
+        { id: 7, name: "Fertility Prep & Detox Combo", category: "fertility", displayCategory: "🌸 Conception", icon: "🤰", description: "Complete fertility preparation kit that cleanses the womb, balances hormones, and supports ovulation. Ideal for post-miscarriage recovery and conception prep.", shortBenefits: ["Cleanses the womb", "Balances hormones", "Supports ovulation"], ingredients: ["Vitex (Chasteberry)", "Red Raspberry Leaf", "Dong Quai", "Maca Root", "Nettle Leaf", "Ashwagandha"], fullBenefits: ["Cleanses the womb and reproductive system", "Balances hormones and regulates menstrual cycles", "Supports ovulation and fertility restoration", "Boosts energy, immunity, and emotional wellness", "Ideal for post-miscarriage recovery and conception prep"] },
+        
+        // Cough Syrup
+        { id: 8, name: "Herbal Cough Syrup", category: "serious", displayCategory: "⚕️ Cough & Respiratory", icon: "🍯", description: "Soothing, natural cough syrup made from honey, ginger, and ivy leaf extract. Soothes throat irritation, loosens mucus, and supports respiratory health.", shortBenefits: ["Soothes cough", "Loosens mucus", "Natural ingredients"], ingredients: ["Raw Honey", "Ginger Root", "Ivy Leaf Extract", "Thyme", "Licorice Root", "Lemon"], fullBenefits: ["Soothes throat irritation and coughing", "Loosens mucus for easier expulsion", "Supports overall respiratory health", "Safe for adults and children (consult doctor)", "No artificial colors or flavors"] },
+        
+        // Detox
+        { id: 9, name: "Flat Belly Detox Combo", category: "fertility", displayCategory: "🌸 Detox", icon: "🍵", description: "Powerful detox combo that reduces belly fat, bloating, and water retention while boosting metabolism and supporting liver function.", shortBenefits: ["Reduces belly fat", "Detoxifies liver", "Boosts metabolism"], ingredients: ["Green Tea", "Dandelion Root", "Milk Thistle", "Ginger", "Lemon Balm", "Fennel Seed"], fullBenefits: ["Reduces belly fat and bloating", "Detoxifies the digestive system and liver", "Boosts metabolism and energy levels", "Supports weight loss and appetite control", "Promotes gut health and regular bowel movement"] },
+        
+        // Diabetes
+        { id: 10, name: "Diabetes Relief Herbal Tea", category: "blood-sugar", displayCategory: "📊 Diabetes", icon: "🩸", description: "Specially formulated herbal tea that helps regulate blood sugar, improve insulin sensitivity, and support pancreatic function naturally.", shortBenefits: ["Regulates blood sugar", "Supports pancreas", "Improves insulin sensitivity"], ingredients: ["Ceylon Cinnamon", "Gymnema", "Bitter Melon", "Fenugreek", "Juniper Berry", "Banaba"], fullBenefits: ["Regulates blood sugar levels naturally", "Improves insulin sensitivity and glucose metabolism", "Purifies blood and supports pancreatic function", "Reduces sugar cravings and boosts energy", "Enhances digestion and promotes overall wellness"] },
+        
+        // Fibroid
+        { id: 11, name: "Fibroid & Cyst Dissolver", category: "fertility", displayCategory: "🌸 Fibroid", icon: "🎗️", description: "Natural formula that helps shrink uterine fibroids and ovarian cysts. Supports hormonal balance and reproductive health.", shortBenefits: ["Shrinks fibroids", "Balances hormones", "Reduces inflammation"], ingredients: ["Green Tea Extract", "Turmeric", "Milk Thistle", "Vitex", "Echinacea", "Burdock Root"], fullBenefits: ["Helps shrink uterine fibroids naturally", "Balances female hormones", "Reduces pelvic inflammation and pain", "Supports regular menstrual cycles", "Promotes overall reproductive wellness"] },
+        
+        // Hair Care
+        { id: 12, name: "Chebe Extra Hair Growth Combo", category: "hair", displayCategory: "💇‍♀️ Hair Care", icon: "💇‍♀️", description: "Complete hair growth system featuring Chebe powder, shampoo cream, and growth spray. Restores hairline, stops breakage, and thickens hair naturally.", shortBenefits: ["Boosts hairline growth", "Stops breakage", "Thickens hair"], ingredients: ["Chebe Powder", "Biotin", "Castor Oil", "Rosemary Oil", "Coconut Oil", "MSM"], fullBenefits: ["Boosts hairline growth and scalp recovery", "Eliminates dandruff and itchy scalp", "Stops breakage and shedding", "Strengthens and thickens hair strands", "Moisturizes and conditions naturally"] },
+        
+        // Herbal Anti Fungal Cream
+        { id: 13, name: "Herbal Anti Fungal Cream", category: "body-care", displayCategory: "🧴 Anti-Fungal", icon: "🦶", description: "Powerful natural cream that treats fungal infections including ringworm, athlete's foot, jock itch, and yeast infections. Fast-acting and gentle.", shortBenefits: ["Treats ringworm", "Athlete's foot relief", "Natural antifungal"], ingredients: ["Tea Tree Oil", "Oregano Oil", "Coconut Oil", "Neem Extract", "Calendula", "Clove Oil"], fullBenefits: ["Effectively treats ringworm and fungal rashes", "Relieves athlete's foot and jock itch", "Soothes itching and burning sensations", "All-natural antifungal formula", "No harsh chemicals or steroids"] },
+        
+        // Herbal Toothpaste
+        { id: 14, name: "Herbal Toothpaste", category: "body-care", displayCategory: "🧴 Oral Care", icon: "🪥", description: "Fluoride-free herbal toothpaste that fights cavities, reduces gum inflammation, whitens teeth naturally, and freshens breath.", shortBenefits: ["Fights cavities", "Reduces gum inflammation", "Whitens teeth naturally"], ingredients: ["Baking Soda", "Coconut Oil", "Peppermint Oil", "Tea Tree Oil", "Xylitol", "Charcoal"], fullBenefits: ["Fights cavities and prevents tooth decay", "Reduces gum inflammation and bleeding", "Whitens teeth naturally without chemicals", "Freshens breath for hours", "Fluoride-free and safe to swallow"] },
+        
+        // Hormonal Balance
+        { id: 15, name: "Hormonal Balance Supplement", category: "hormonal", displayCategory: "⚖️ Hormonal Balance", icon: "⚖️", description: "Adaptogenic herbal blend that balances female hormones, reduces PMS symptoms, regulates menstrual cycles, and supports mood stability.", shortBenefits: ["Balances hormones", "Reduces PMS", "Regulates cycles"], ingredients: ["Vitex", "Maca Root", "Ashwagandha", "Evening Primrose Oil", "Shatavari", "Dong Quai"], fullBenefits: ["Gently balances estrogen and progesterone", "Reduces PMS symptoms like cramps and mood swings", "Regulates irregular menstrual cycles", "Supports mood stability and emotional wellness", "Helps with perimenopause and menopause symptoms"] },
+        
+        // Milk Booster
+        { id: 16, name: "Breast Milk Booster Tea", category: "women", displayCategory: "👩 Milk Booster", icon: "🍼", description: "Galactagogue herbal tea that naturally increases breast milk production for nursing mothers. Safe for both mom and baby.", shortBenefits: ["Increases milk supply", "Natural galactagogue", "Safe for baby"], ingredients: ["Fenugreek", "Blessed Thistle", "Fennel Seed", "Milk Thistle", "Goat's Rue", "Alfalfa"], fullBenefits: ["Increases breast milk production naturally", "Rich in galactagogue herbs", "Supports overall nursing health", "Safe for both mother and baby", "Pleasant tasting herbal tea"] },
+        
+        // Premenstrual & Ovulation Pain Relief
+        { id: 17, name: "Premenstrual & Ovulation Pain Relief Combo", category: "women", displayCategory: "👩 Pain Relief", icon: "🩹", description: "Herbal combo that relieves menstrual cramps, ovulation pain, and cycle-related discomfort. Balances hormones and reduces inflammation.", shortBenefits: ["Relieves menstrual cramps", "Eases ovulation pain", "Reduces inflammation"], ingredients: ["Cramp Bark", "Ginger", "Turmeric", "Chamomile", "Raspberry Leaf", "Black Cohosh"], fullBenefits: ["Relieves premenstrual and ovulation pain", "Balances hormones and regulates menstrual flow", "Cleanses the womb and fallopian tubes", "Reduces inflammation and cycle-related discomfort", "Supports fertility and reproductive vitality"] }
+    ];
+    
+    // Get unique categories for filter buttons
+    function displayProducts(category) {
+        const container = document.getElementById('productsContainer');
+        const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+        
+        container.innerHTML = filtered.map(product => `
+            <div class="product-card" data-aos="fade-up" data-category="${product.category}">
+                <div class="product-badge">${product.displayCategory}</div>
+                <div class="product-img">
+                    ${product.icon}
+                </div>
+                <div class="product-body">
+                    <div class="product-category">${product.displayCategory}</div>
+                    <h3 class="product-title">${product.name}</h3>
+                    <p class="product-description">${product.description.substring(0, 100)}...</p>
+                    <ul class="product-short-benefits">
+                        ${product.shortBenefits.map(b => `<li><i class="fas fa-check-circle"></i> ${b}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="product-footer">
+                    <button onclick="openProductModal(${product.id})" class="btn-details"><i class="fas fa-info-circle"></i> Read More</button>
+                    <a href="https://wa.me/" class="btn-order"><i class="fab fa-whatsapp"></i> Order</a>
+                </div>
+            </div>
+        `).join('');
+        
+        AOS.refresh();
+    }
+    
+    // Modal functions
+    function openProductModal(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        document.getElementById('modalTitle').innerText = product.name;
+        document.getElementById('modalImage').innerHTML = product.icon;
+        
+        document.getElementById('modalContent').innerHTML = `
+            <div class="product-category" style="text-align: center; margin-bottom: 10px;">${product.displayCategory}</div>
+            <p style="font-size: 1rem; line-height: 1.6;">${product.description}</p>
+            
+            <div class="ingredients-list">
+                <h5><i class="fas fa-leaf"></i> Key Ingredients</h5>
+                <ul>
+                    ${product.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                </ul>
+            </div>
+            
+            <div class="full-benefits">
+                <h5><i class="fas fa-star"></i> Complete Benefits</h5>
+                <ul style="list-style: none; padding-left: 0;">
+                    ${product.fullBenefits.map(b => `<li><i class="fas fa-check-circle" style="color: var(--primary);"></i> ${b}</li>`).join('')}
+                </ul>
+            </div>
+            
+            <div style="background: #F5F8F2; padding: 15px; border-radius: 16px;">
+                <h5><i class="fas fa-shield-alt"></i> Quality Assurance</h5>
+                <p style="font-size: 0.9rem;">All Maranatha Naturals products are 100% organic, cruelty-free, and formulated by Dr. Janny. Each batch is tested for purity and potency.</p>
+            </div>
+        `;
+        
+        const modal = new bootstrap.Modal(document.getElementById('productModal'));
+        modal.show();
+    }
+    
+    window.openProductModal = openProductModal;
+    
+    // Initial display
+    displayProducts('all');
+    
+    // Filter functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const category = btn.getAttribute('data-category');
+            displayProducts(category);
+        });
+    });
+</script>
+</body>
+</html>

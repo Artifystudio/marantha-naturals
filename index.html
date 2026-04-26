@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maranatha Naturals | Dr. Janny - Natural Healing</title>
+    
+    <!-- Bootstrap 5 CSS + Icons + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #1F2A3A;
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4, .logo, .navbar-brand {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Custom Colors */
+        :root {
+            --primary: #2E5A3B;
+            --primary-dark: #1F3A2B;
+            --secondary: #C9A03D;
+            --cream: #F9F6EE;
+            --light-bg: #F5F8F2;
+            --dark: #1F2A3A;
+        }
+        
+        /* Navbar Styling */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+            transition: all 0.3s;
+            
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary) !important;
+            letter-spacing: -0.5px;
+        }
+        
+        .navbar-brand small {
+            font-size: 0.7rem;
+            display: block;
+            color: var(--secondary);
+            letter-spacing: 1px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark) !important;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary) !important;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .btn-wa-nav {
+            background: #25D366;
+            color: white !important;
+            padding: 8px 20px !important;
+            border-radius: 40px;
+            margin-left: 15px;
+        }
+        
+        .btn-wa-nav:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--cream) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(46,90,59,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero-content .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .hero-content .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: rgba(46,90,59,0.2);
+            z-index: -1;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #4a5b4e;
+            margin-bottom: 30px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .hero-image {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #6b7c6e;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+        
+        /* About Section - Enhanced */
+        .about-section {
+            background: white;
+        }
+        
+        .about-img {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .mission-vision {
+            background: var(--light-bg);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+        
+        .mission-card, .vision-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .mission-icon, .vision-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .what-makes-us {
+            background: var(--primary);
+            color: white;
+            border-radius: 30px;
+            padding: 50px;
+            margin-top: 50px;
+        }
+        
+        .what-makes-us h3 {
+            color: var(--secondary);
+        }
+        
+        .diff-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+        
+        .products-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .product-badge {
+            background: var(--cream);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .promise-box {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        /* Testimonial Cards */
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        
+        .testimonial-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #4a5b4e;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            border-radius: 30px;
+            margin: 0 24px;
+        }
+        
+        .btn-cta {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 12px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-cta:hover {
+            background: #b58a2e;
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: #ccc;
+            padding: 60px 0 30px;
+            margin-top: 0;
+        }
+        
+        .footer h5 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer .social-links a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 10px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #2c3e2f;
+            font-size: 0.8rem;
+        }
+        
+        .disclaimer {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 99;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+        
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            background: var(--primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            section {
+                padding: 50px 0;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .cta-section {
+                margin: 0 16px;
+            }
+            .mission-vision {
+                padding: 20px;
+            }
+            .what-makes-us {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            MARANATHA NATURALS
+            <small>with Dr. Janny</small>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                <li class="nav-item"><a class="nav-link" href="#payment">Payment</a></li>
+                <li class="nav-item"><a class="btn-wa-nav" href="https://wa.me/256790000222"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div style="height: 100px;"></div>
+
+<section id="home" class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 hero-content" data-aos="fade-right">
+                <h1>
+                    Nature's <span class="highlight">Healing Power</span><br>
+                    For Total Body Wellness
+                </h1>
+                <p>Doctor-formulated herbal solutions that heal from the root. Say goodbye to UTI, fertility issues, hair loss, diabetes, and chronic conditions naturally.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="products.html" class="btn btn-lg" style="background: var(--primary); color: white; border-radius: 50px; padding: 12px 35px;">Explore Products →</a>
+                    <a href="#about" class="btn btn-lg btn-outline-success" style="border-radius: 50px; padding: 12px 35px; border-color: var(--primary); color: var(--primary);">Learn About Us</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">10,000+</div>
+                        <div>Happy Customers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div>Herbal Formulas</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">15+</div>
+                        <div>Years Experience</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 hero-image text-center" data-aos="fade-left">
+                <img src="images/hero.webp" alt="Natural Healing" class="img-fluid" style="border-radius: 30px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section - Complete with Your Content -->
+<section id="about" class="about-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="about-img">
+                    <img src="images/mara.webp" alt="Maranatha Naturals" class="img-fluid" style="width: 100%; border-radius: 30px;">
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <span style="color: var(--secondary); font-weight: 600;">ABOUT MARANATHA NATURALS</span>
+                <h2 class="section-title" style="text-align: left; margin-top: 15px;">Healing Power of Nature</h2>
+                <p style="font-size: 1rem; line-height: 1.7;">At Maranatha Naturals, we believe in the healing power of nature. Founded with a vision to restore health, beauty, and confidence through plant-based remedies, we specialize in herbal wellness, skincare, reproductive health, and hair restoration solutions. Our products are carefully curated, blending traditional herbal wisdom with modern innovation to deliver safe, effective, and affordable solutions for everyday health challenges.</p>
+                <p style="margin-top: 15px;">Available in <strong>Kenya, Uganda, and beyond</strong>, we are committed to quality, authenticity, and accessibility.</p>
+            </div>
+        </div>
+
+        <!-- Mission & Vision -->
+        <div class="mission-vision" data-aos="fade-up">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="mission-card">
+                        <div class="mission-icon"><i class="fas fa-bullseye"></i></div>
+                        <h3>Our Mission</h3>
+                        <p>To empower individuals and families across Kenya, Uganda, and beyond with natural products that:</p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 10px;"></i> Heal from within</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 10px;"></i> Enhance beauty and vitality</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 10px;"></i> Support reproductive and digestive health</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 10px;"></i> Promote confidence and holistic wellness</li>
+                        </ul>
+                        <p class="mt-3">We are committed to quality, authenticity, and accessibility, ensuring that every product is crafted with care and delivered at an affordable price.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="vision-card">
+                        <div class="vision-icon"><i class="fas fa-eye"></i></div>
+                        <h3>Our Vision</h3>
+                        <p>A healthier, more confident community where natural remedies are trusted as the first choice for wellness, beauty, and reproductive health.</p>
+                        <p class="mt-3"><strong>We envision Maranatha Naturals as a household name across Africa — synonymous with transformation, trust, and results.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- What Makes Us Different -->
+        <div class="what-makes-us" data-aos="fade-up">
+            <h3 style="text-align: center; margin-bottom: 30px;">What Makes Us Different</h3>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="diff-item"><i class="fas fa-leaf" style="margin-right: 10px;"></i> <strong>100% Plant-Based & Organic</strong> – No preservatives, additives, or harmful chemicals</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="diff-item"><i class="fas fa-heart" style="margin-right: 10px;"></i> <strong>Customer-Centered</strong> – Real testimonials, real results, real transformations</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="diff-item"><i class="fas fa-globe" style="margin-right: 10px;"></i> <strong>Accessible & Affordable</strong> – Available in Kenya and Uganda at pocket-friendly prices</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="diff-item"><i class="fas fa-flask" style="margin-right: 10px;"></i> <strong>Quality Assured</strong> – Each product is tested for safety, purity, and effectiveness</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Products -->
+        <div style="margin-top: 50px;" data-aos="fade-up">
+            <h3 style="text-align: center; margin-bottom: 20px;">Our Products</h3>
+            <p style="text-align: center; margin-bottom: 30px;">We proudly offer a wide range of herbal solutions, including:</p>
+            <div class="products-list justify-content-center">
+                <span class="product-badge">Fertility Prep & Detox Teas</span>
+                <span class="product-badge">Ulcers Active Defence</span>
+                <span class="product-badge">Hair Growth & Alopecia Solutions</span>
+                <span class="product-badge">Skin Care Combos</span>
+                <span class="product-badge">Weight Gain & Slimming Formulas</span>
+                <span class="product-badge">Diabetes & Blood Pressure Teas</span>
+                <span class="product-badge">UTI & Candida Combos</span>
+                <span class="product-badge">Tumorless Herbal Formula</span>
+            </div>
+        </div>
+
+        <!-- Our Promise -->
+        <div class="promise-box" data-aos="fade-up">
+            <i class="fas fa-handshake" style="font-size: 3rem; margin-bottom: 20px; color: var(--secondary);"></i>
+            <h3 style="color: var(--secondary);">Our Promise</h3>
+            <p style="font-size: 1.1rem;">Every jar, pouch, and bottle from Maranatha Naturals carries a promise:</p>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <i class="fas fa-seedling" style="font-size: 2rem;"></i>
+                    <p class="mt-2">Healing through nature</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-coins" style="font-size: 2rem;"></i>
+                    <p class="mt-2" >Affordable wellness for all</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-chart-line" style="font-size: 2rem;"></i>
+                    <p class="mt-2">Visible results backed by real stories</p>
+                </div>
+            </div>
+            <p class="mt-4" style="font-size: 1.2rem; font-weight: 600;">We don't just sell products — we deliver hope, transformation, and confidence.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" style="background: var(--light-bg);">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Why Choose Maranatha Naturals?</h2>
+        <p class="section-subtitle" data-aos="fade-up">We combine ancient herbal wisdom with modern medical expertise</p>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                    <h4>100% Organic & Pure</h4>
+                    <p>No synthetic chemicals, fillers, or toxins. Just pure, potent herbs sourced from nature.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-user-md"></i></div>
+                    <h4>Doctor-Formulated</h4>
+                    <p>Each formula is developed and tested by Dr. Janny, a certified natural medicine practitioner.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h4>24/7 Personal Support</h4>
+                    <p>Direct WhatsApp access to Dr. Janny and her team for personalized guidance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">What Our Customers Say</h2>
+        <p class="section-subtitle" data-aos="fade-up">Real stories of healing and transformation</p>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <i class="fas fa-quote-left" style="color: var(--secondary); font-size: 1.5rem; opacity: 0.5;"></i>
+                        <p>After 5 years of struggling with UTI infections, Dr. Janny's herbal combo cleared it completely. I'm finally free!</p>
+                    </div>
+                    <div class="testimonial-author">- Sarah M.</div>
+                    <div><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i></div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <i class="fas fa-quote-left" style="color: var(--secondary); font-size: 1.5rem; opacity: 0.5;"></i>
+                        <p>The hair restoration combo brought my edges back! I had alopecia for 3 years and now my hair is thicker than ever.</p>
+                    </div>
+                    <div class="testimonial-author">- Grace K.</div>
+                    <div><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i></div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <i class="fas fa-quote-left" style="color: var(--secondary); font-size: 1.5rem; opacity: 0.5;"></i>
+                        <p>After two miscarriages, the Fertility Prep Combo helped me conceive naturally. I'm now 6 months pregnant. God bless Dr. Janny!</p>
+                    </div>
+                    <div class="testimonial-author">- Rebecca N.</div>
+                    <div><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i><i class="fas fa-star" style="color: #FFD700;"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Section -->
+<section id="payment" style="background: var(--light-bg);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div style="background: white; border-radius: 30px; padding: 40px;" data-aos="fade-up">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Cash Payment Instructions</h3>
+                    <p style="text-align: center; margin-bottom: 30px;">We accept cash payments BEFORE delivery. Choose your method:</p>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div style="background: var(--light-bg); padding: 20px; border-radius: 20px;">
+                                <h4>🏦 Bank Deposit</h4>
+                                <p>Deposit cash at any branch:</p>
+                                <ul>
+                                    <li>Account: Maranatha Naturals</li>
+                                    <li>Bank: Absa Bank</li>
+                                    <li>Send receipt via WhatsApp</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="background: var(--light-bg); padding: 20px; border-radius: 20px;">
+                                <h4>Pay at Our Shop</h4>
+                                <p>Visit us in person:</p>
+                                <ul>
+                                    <li>𝑲𝒂𝒎𝒑𝒂𝒍𝒂-𝑼𝒈𝒂𝒏𝒅𝒂 𝙆𝙊𝙊𝙆𝙄 𝙏𝙊𝙒𝙀𝙍 𝙎𝙝𝙤𝙥 711 𝑶𝒑𝒑𝒐𝒔𝒊𝒕𝒆 𝑪𝑷𝑺, 𝒃𝒆𝒉𝒊𝒏𝒅 𝑴𝒂𝒃𝒊𝒍𝒊𝒛𝒊 𝒄𝒐𝒎𝒑𝒍𝒆𝒙 .</li>
+                                    <li>Mon-Sat: 9AM - 5PM</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4"><strong>⚠️ Orders ship ONLY after payment confirmation. No cash on delivery.</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section>
+    <div class="container">
+        <div class="cta-section p-5" data-aos="zoom-in">
+            <h2 style="font-size: 2rem;">Ready to Start Your Healing Journey?</h2>
+            <p style="font-size: 1.1rem; margin: 20px 0;">Contact Dr. Janny directly on WhatsApp for a free consultation</p>
+            <a href="https://wa.me/" class="btn-cta"><i class="fab fa-whatsapp"></i> Chat with Dr. Janny</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5>Maranatha Naturals</h5>
+                <p>Doctor-formulated, nature-powered wellness solutions for the whole family.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="col-md-2 mb-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="#payment">Payment</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Contact Info</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/">WhatsApp Us</a></li>
+                    <li><i class="fas fa-envelope"></i> info@maranathanaturalss.com</li>
+                    <li><i class="fas fa-phone"></i> [Your Phone]</li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Business Hours</h5>
+                <p>Monday - Saturday: 9AM - 6PM<br>Sunday: Closed</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Maranatha Naturals with Dr. Janny. All rights reserved. Designed By Deprynce Tech</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<!-- Back to Top -->
+<a href="#home" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('mainNav');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        
+        // Back to top button
+        const backBtn = document.getElementById('backToTop');
+        if (window.scrollY > 300) {
+            backBtn.classList.add('show');
+        } else {
+            backBtn.classList.remove('show');
+        }
+    });
+    
+    // Scrollspy for active nav links
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>
